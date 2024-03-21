@@ -6,7 +6,7 @@ This branch of the Facet-Based Echo Model (FBEM) is for qualitative evaluations 
 
 For this to be possible, FBEM was modified to account for unfocused SAR processing (instead of Delay-Doppler SAR). The air-snow interface topography inputted into the FBEM used a Generalised Additive Model (GAM) surface created from NASA's ATM lidar. Either the air-snow
 interface GAM was used as a proxy for the snow-ice interface topography (within the OIB.m script), or the snow-ice interface topography
-was individually estimated by creating a GAM surface of combined lidar+coincident \textbf{$in\ situ$} snow depths (within OIB_indep_interfaces.m).
+was individually estimated by creating a GAM surface of combined lidar+coincident $in\ situ$ snow depths (within OIB_indep_interfaces.m).
 
 These modifications to FBEM are not particularly review-ready (nor in my primary language), but I thought I would keep it open source for potential future studies:) Please let me know if you have any questions by contacting me @ claude[at]derijke.org , or Jack at jack.c.landy[at]uit.no . Please refer to the other README file for copyright details.
 
