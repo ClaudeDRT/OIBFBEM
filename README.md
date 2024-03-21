@@ -10,7 +10,7 @@ was individually estimated by creating a GAM surface of combined lidar+coinciden
 
 These modifications to FBEM are not particularly review-ready (nor in my primary language), but I thought I would keep it open source for potential future studies:) Please let me know if you have any questions by contacting me @ claude[at]derijke.org , or Jack at jack.c.landy[at]uit.no . Please refer to the other README file for copyright details.
 
-There are some hardcoded modifications that I made within the files themselves (within snow_backscatter.m) that I haven't included in this repository. This included modifying eps_ds within snow_backscatter.m so that brine-wetted snow dielectrics (calculated using the Snow Microwave Radiative Transfer model (SMRT)'s Python implementation of Geldsetzer-et-al-2009's equations) could be used instead of dry snow dielectrics.
+There are some hardcoded modifications that I made within the files themselves (within snow_backscatter.m) that I haven't included in this repository. This included modifying eps_ds within snow_backscatter.m so that brine-wetted snow dielectrics (calculated using the Snow Microwave Radiative Transfer model (SMRT)'s Python implementation of Geldsetzer-et-al-2009's equations) could be used instead of dry snow dielectrics. Be careful of any hardcoded settings, such as dielectrics, snow depths, or discrepancies in function inputs!; it's probably best to run diffs between this repository and the repository that it forked to look for these:) Happy simulating!
 
 
 References:
