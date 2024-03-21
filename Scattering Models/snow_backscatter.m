@@ -70,19 +70,16 @@ tau_H = 1 + rho_H; % transmission coeff, H-pol
 tau_V = (1 + rho_V)*(cos(theta)/cos(theta_2)); % transmission coeff, V-pol
 tau_snow = spline(theta,(tau_H + tau_V)/2);
 
-% gamma_H = rho_H.^2; % reflectivity (intensity)
-% gamma_V = rho_V.^2; % reflectivity (intensity)
+gamma_H = rho_H.^2; % reflectivity (intensity)
+gamma_V = rho_V.^2; % reflectivity (intensity)
 
 
 %% Backscattering Coefficient of Air-Snow Interface, sigma0
 
-% Calculate coherent vs. incoherent surface scattering ratio
-% psi = k*sigma_s*cos(theta); % frequency-dependent roughness parameter
-% omega = exp(-4*psi.^2); % fractional coherent component
-
+%in this section I (Claude) added the 4* at the front, and added a 4* in the last exponential too:::
 % Calculate coherent reflected backscattering coefficient
-% sigma_0_HH_coh = (gamma_H/beta_c^2)*exp(-4*k^2*sigma_s^2).*exp(-theta.^2/beta_c^2); % coherent component of backscattering coefficient
-% sigma_0_VV_coh = (gamma_V/beta_c^2)*exp(-4*k^2*sigma_s^2).*exp(-theta.^2/beta_c^2); % coherent component of backscattering coefficient
+sigma_0_HH_coh = (gamma_H.*4/beta_c^2)*exp(-4*k^2*sigma_s^2).*exp(-4*theta.^2/beta_c^2); % coherent component of backscattering coefficient
+sigma_0_VV_coh = (gamma_V.*4/beta_c^2)*exp(-4*k^2*sigma_s^2).*exp(-4*theta.^2/beta_c^2); % coherent component of backscattering coefficient
 
 % Calculate incoherent surface backscattering coefficient
 % Run single-scattering IEM for relevant range of facet incidence angles
@@ -94,11 +91,11 @@ end
 
 % Calculate total co-polarized surface backscattering cofficients,
 % including coherent reflected power
-% sigma_0_HH_s_surf = 10*log10(sigma_0_HH_coh + 10.^(sigma_0_HH_s_surf'/10)); % H-pol, dB
-% sigma_0_VV_s_surf = 10*log10(sigma_0_VV_coh + 10.^(sigma_0_VV_s_surf'/10)); % V-pol, dB
+sigma_0_HH_s_surf = 10*log10(sigma_0_HH_coh + 10.^(sigma_0_HH_s_surf'/10)); % H-pol, dB
+sigma_0_VV_s_surf = 10*log10(sigma_0_VV_coh + 10.^(sigma_0_VV_s_surf'/10)); % V-pol, dB
 
-% Assuming no coherent reflected power
-sigma_0_HH_s_surf(isinf(sigma_0_HH_s_surf))=NaN; sigma_0_VV_s_surf(isinf(sigma_0_VV_s_surf))=NaN;
+% Assuming no coherent reflected power 
+%sigma_0_HH_s_surf(isinf(sigma_0_HH_s_surf))=NaN; sigma_0_VV_s_surf(isinf(sigma_0_VV_s_surf))=NaN;
 
 % Build spline interpolants (assumption that scattering is polarization-independent)
 % dB
@@ -112,7 +109,7 @@ sigma_0_snow_surf = spline(theta,(sigma_0_HH_s_surf + sigma_0_VV_s_surf)/2);
 % rayleigh_approximation = abs(n*chi); % Rayleigh scattering appropriate if <0.5
 
 % Mie extinction coefficient in dry snow
-[~,~,kappa_e,~] = MieExtinc_DrySnow(rho_s*1e-3,r_s,f_c*1e-9,T_s);
+%[~,~,kappa_e,~] = MieExtinc_DrySnow(rho_s*1e-3,r_s,f_c*1e-9,T_s);
 
 % Two-way loss factor
 L_theta = exp((-2*kappa_e*h_s)./cos(theta_2)); % including scattering
