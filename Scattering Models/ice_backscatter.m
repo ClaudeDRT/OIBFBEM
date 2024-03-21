@@ -112,7 +112,8 @@ end
 sigma_0_HH_si_surf = 10*log10(sigma_0_HH_coh + 10.^(sigma_0_HH_si_surf'/10)); % H-pol, dB
 sigma_0_VV_si_surf = 10*log10(sigma_0_VV_coh + 10.^(sigma_0_VV_si_surf'/10)); % V-pol, dB
 
-sigma_0_HH_si_surf(isinf(sigma_0_HH_si_surf))=NaN; sigma_0_VV_si_surf(isinf(sigma_0_VV_si_surf))=NaN;
+%Assuming no coherent backscatter:
+%sigma_0_HH_si_surf(isinf(sigma_0_HH_si_surf))=NaN; sigma_0_VV_si_surf(isinf(sigma_0_VV_si_surf))=NaN;
 
 % Build spline interpolants (assumption that scattering is polarization-independent)
 % dB
