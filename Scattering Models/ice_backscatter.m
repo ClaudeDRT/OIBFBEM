@@ -94,13 +94,10 @@ gamma_V = rho_V.^2; % reflectivity (intensity)
 
 %% Backscattering Coefficient of Snow-Ice Interface, sigma0
 
-% Calculate coherent vs. incoherent surface scattering ratio
-psi = k*sigma_si*cos(theta); % frequency-dependent roughness parameter
-omega = exp(-4*psi.^2); % fractional coherent component
-
+%in this section I (Claude) added the 4* at the front, and added a 4* in the last exponential too:::
 % Calculate coherent reflected backscattering coefficient
-sigma_0_HH_coh = ((gamma_H.*omega)/beta_c^2)*exp(-4*k^2*sigma_si^2).*exp(-theta.^2/beta_c^2); % coherent component of backscattering coefficient
-sigma_0_VV_coh = ((gamma_V.*omega)/beta_c^2)*exp(-4*k^2*sigma_si^2).*exp(-theta.^2/beta_c^2); % coherent component of backscattering coefficient
+sigma_0_HH_coh = ((gamma_H.*4)/beta_c^2)*exp(-4*k^2*sigma_si^2).*exp(-4*theta.^2/beta_c^2); % coherent component of backscattering coefficient
+sigma_0_VV_coh = ((gamma_V.*4)/beta_c^2)*exp(-4*k^2*sigma_si^2).*exp(-4*theta.^2/beta_c^2); % coherent component of backscattering coefficient
 
 % Calculate incoherent surface backscattering coefficient
 % Run single-scattering IEM for relevant range of facet incidence angles
